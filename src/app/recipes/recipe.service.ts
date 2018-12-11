@@ -11,6 +11,7 @@ export class RecipeService {
 
   private recipes: Recipe[] = [
     new Recipe(
+      1,
       'Tasty Schnitzel',
       'A super tasty Schnitzel - just awesome!',
       'https://api.norecipes.com/wp-content/uploads/2018/08/teriyaki-chicken-recipe_007.jpg',
@@ -20,6 +21,7 @@ export class RecipeService {
       ]
     ),
     new Recipe(
+      2,
       'Big Fat Burger',
       'This is simply a test',
       'https://api.norecipes.com/wp-content/uploads/2018/08/teriyaki-chicken-recipe_007.jpg',
@@ -38,6 +40,10 @@ export class RecipeService {
 
   addIngredientsToShoppingList(ingredients: Ingredient[]) {
     this.shoppingListService.addIngredients(ingredients);
+  }
+
+  getRecipeById(id: number) {
+
   }
 
 }
