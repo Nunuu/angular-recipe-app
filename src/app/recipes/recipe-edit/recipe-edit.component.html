@@ -1,11 +1,25 @@
 <div class="row">
   <div class="col-xs-12">
-    <form>
+    <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col-xs-12">
+          <button class="btn btn-success" type="submit" [disabled]="!recipeForm.valid">
+            Save
+          </button>
+          <button class="btn btn-danger" type="button">
+            Cancel
+          </button>
+        </div>
+      </div>
       <div class="row">
         <div class="col-xs-12">
           <div class="form-group">
             <label for="name">Name</label>
-            <input type="text" id="name" class="form-control">
+            <input
+              type="text"
+              id="name"
+              class="form-control"
+              formControlName="name">
           </div>
         </div>
       </div>
@@ -13,13 +27,19 @@
         <div class="col-xs-12">
           <div class="form-group">
             <label for="imagePath">Image URL</label>
-            <input type="text" id="imagePath" class="form-control">
+            <input
+              type="text"
+              id="imagePath"
+              class="form-control"
+              formControlName="imagePath">
           </div>
         </div>
       </div>
       <div class="row">
         <div class="col-xs-12">
-          <img src="" class="img-responsive">
+          <img
+            [src]="recipeForm.get('imagePath').value"
+            class="img-responsive">
         </div>
       </div>
       <div class="row">
@@ -30,29 +50,31 @@
               id="description"
               name="description"
               class="form-control"
-              rows="6">
+              rows="6"
+              formControlName="description">
             </textarea>
           </div>
         </div>
       </div>
       <div class="row">
-        <div class="col-xs-12">
-          <div class="row">
+        <div class="col-xs-12" formArrayName="ingredients">
+          <div
+            class="row"
+            *ngFor="let ingredientCtrl of getControls(); let i = index"
+            [formGroupName]="i">
             <div class="col-xs-8">
               <input
                 type="text"
-                placeholder="Name"
-                id="ingredient-name"
+                placeholder="Ingredient"
                 class="form-control"
-                name="ingredient-name">
+                formControlName="name">
             </div>
             <div class="col-xs-2">
               <input
                 type="number"
-                placeholder="Amount"
-                id="ingredient-amount"
+                placeholder="0"
                 class="form-control"
-                name="ingredient-amount">
+                formControlName="amount">
             </div>
             <div class="col-xs-2">
               <button class="btn btn-danger">X</button>
@@ -63,11 +85,11 @@
       <hr>
       <div class="row">
         <div class="col-xs-12">
-          <button class="btn btn-success" type="submit">
-            Save
-          </button>
-          <button class="btn btn-danger" type="button">
-            Cancel
+          <button
+            class="btn btn-success"
+            type="button"
+            (click)="onAddIngredient()">
+            Add Ingredient
           </button>
         </div>
       </div>

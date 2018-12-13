@@ -1,0 +1,11 @@
+img {
+  max-height: 100px;
+}
+
+.row {
+  margin-bottom: 10px;
+}
+
+.form-group .ng-invalid.ng-touched {
+  border: 1px solid red;
+}
